@@ -1,9 +1,10 @@
 # Import the module
 import pygame as pg
 pg.font.init()
+pg.mixer.init()
 # Create the window
-WIDTH = 1040
-HEIGHT = 720
+WIDTH = 800
+HEIGHT = 640
 window = pg.display.set_mode((WIDTH, HEIGHT))
 # Create a clock object
 clock = pg.time.Clock()
@@ -34,39 +35,21 @@ class Player(ImageSprite):
             self.rect.left = 0
         if self.rect.right > WIDTH:
             self.rect.right = WIDTH
+
 background =  ImageSprite(filename='galaxy.jpg', position=(0,0),  size = (WIDTH, HEIGHT))
-
-# Create the MAIN loop
+rocket = Player(filename='pngwing.com.png', position=(WIDTH/2, HEIGHT-80), size=(100, 80), speed=(4, 0))
+#enemy = 
+# Create the MAIN loop  
 while not pg.event.peek(pg.QUIT):
-    window.fill((255,255,255))
-    player.update()
-    enemy.update()
-    for w in walls:
-        if player.is_colliding_with(w):
-            player.reset()
-            lives-=1
-            point_counter.set_text('Lives:' + str(lives))
-            
-    if lives<=0:
-        break
+    rocket.update()
 
-    if player.is_colliding_with(enemy):
-        window.fill((10, 10, 10))
-        player.reset()
-    if player.is_colliding_with(goal):
-        window.fill((20, 20, 20))
+    background.draw(window)
+    rocket.draw(window)
     
- 
-    
-    # update the screen
+
+
+    #update the screen
     pg.display.update()
-    # tick the clock
-    clock.tick(60)
-window.fill((0, 0, 0))
-game_over.set_text('Game Over')
-game_over.draw(window, bg =  False)
-pg.display.update()
-pg.time.delay(2000)
 
  
 
